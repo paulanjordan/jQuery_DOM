@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!-- Build an application that uses jQuery to do the following:
+
+Contains a form with two inputs for a title and rating along with a button to submit the form.
+When the form is submitted, capture the values for each of the inputs and append them to the DOM along with a button to remove each title and rating from the DOM.
+When the button to remove is clicked, remove each title and rating from the DOM. -->
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form id="movie-form" class="movie-ratings">
+      <label for="movie-title">Movie Title:</label>
+      <input
+        type="text"
+        id="movie-title"
+        name="movie-title"
+        value="Star Wars"
+      />
+
+      <label for="movie-rating">Rating:</label>
+      <input
+        type="number"
+        id="movie-rating"
+        name="movie-rating"
+        min="0"
+        max="10"
+        value="8"
+      />
+
+      <input id="submit" type="submit" value="Submit" />
+    </form>
+
+    <table id="added-movies">
+      <thead>
+        <tr>
+          <th>Movie</th>
+          <th>Rating</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+    <script>
+      $('#movie-form').submit(function (e) {
+        e.preventDefault();
+      });
+
+      // jQuery button click event to add a row.
+      $('#submit').on('click', function () {
+        let movie = $('#movie-title').val();
+        let rating = $('#movie-rating').val();
+        // adds a row inside of the tbody
+        $('#tbody').append(`<tr>
+                                <td><p>${movie}</p></td>
+                                <td><p>${rating}</p></td>
+                                <td><button class="remove" type="button">Remove</button></td>
+                             </tr>`);
+      });
+
+      $('#tbody').on('click', '.remove', function () {
+        $(this).closest('tr').remove();
+      });
+    </script>
+  </body>
+</html>
